@@ -34,13 +34,13 @@ class Program
 
         Console.WriteLine($"Your grade is {letter}.");
 
-        if (percent >= 70)
+        if (percent >= 60)
         {
             Console.WriteLine("You passed!");
         }
         else
         {
-            Console.WriteLine("You can do better.");
+            Console.WriteLine("You can do better next time.");
         }
     }
 }
