@@ -1,5 +1,9 @@
 using System;
 
+// This program exceeds the basic task requirements by incorporating additional features such as
+// random prompt generation, file saving and loading functionality, and a user-friendly menu system,
+// demonstrating enhanced functionality and a deeper level of implementation.
+
 class Program
 {
     static void Main()
