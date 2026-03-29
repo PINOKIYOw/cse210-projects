@@ -23,7 +23,7 @@ public class Order
         double subtotal = 0;
         foreach (Product product in _products)
         {
-            subtotal += product.subtotal();
+            subtotal += product.Subtotal();
         }
 
         if (_customer.IsUSA())
