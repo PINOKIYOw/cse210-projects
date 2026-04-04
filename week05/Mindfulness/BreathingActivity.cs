@@ -1,33 +1,29 @@
 using System;
-using System.Diagnostics;
-using System.Security.Cryptography;
-using System.Security.Cryptography.X509Certificates;
 
 public class BreathingActivity : Activity
 {
-    public BreathingActivity(int duration) : base("Breathing", "relax by walking you through breathing in and out slowly. Clear your mind and focus on your breathings.", duration)
+    public BreathingActivity() : base(
+        "Breathing",
+        "This activity will help you relax by guiding your breathing.")
     {
-
     }
 
     public void Run()
     {
-        Console.Clear();
         DisplayStartMessage();
-        Console.Write("Get Ready...");
-        ShowSpinner(5);
-        Console.WriteLine();
 
-        int cycles = Duration / 10;
-        for (int i = 0; i < cycles; i++)
+        int time = 0;
+        while (time < _duration)
         {
-            Console.Write("Breathe in...");
-            ShowCountDown(5);
-            Console.Write("Breathe out...");
-            ShowCountDown(5);
-            Console.WriteLine("");
+            Console.Write("Breathe in... ");
+            ShowCountdown(4);
+
+            Console.Write("Breathe out... ");
+            ShowCountdown(4);
+
+            time += 8;
         }
 
-        DisplayEndingMessage();
+        DisplayEndMessage();
     }
 }

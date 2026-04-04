@@ -1,44 +1,39 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Runtime.InteropServices;
-using System.Security.Cryptography.X509Certificates;
 
 public class ListingActivity : Activity
 {
     private List<string> _prompts = new List<string>
     {
-        "Who are people that you appreciate?",
-        "What are personal strengths of yours?",
-        "Who are the people you have helped this week?",
-        "When have you felt the Holy Ghost this month?",
-        "Who are some of your personal heroes?",
+        "Who are people you appreciate?",
+        "What are your strengths?",
+        "Who have you helped recently?"
     };
-    public ListingActivity(int duration) : base("Listing", "reflect on the good things in your life by listing as many things as you can in a certain area.", duration)
-    {
 
+    public ListingActivity() : base(
+        "Listing",
+        "List as many positive things as you can.")
+    {
     }
 
     public void Run()
     {
-        Console.Clear();
         DisplayStartMessage();
-        Console.WriteLine("Get ready...");
-        ShowSpinner(5);
-        Console.WriteLine();
 
-        Console.WriteLine("List as many responses you can to the following prompt: ");
-        string selectedPrompt = GetRandom(_prompts, _prevPrompt);
-        Console.WriteLine($" --- {selectedPrompt} ---");
-        Console.WriteLine();
+        Random rand = new Random();
+        Console.WriteLine(_prompts[rand.Next(_prompts.Count)]);
+        ShowCountdown(5);
 
-        Console.Write("You may begin in: ");
-        ShowCountDown(5);
-        Console.WriteLine();
+        List<string> items = new List<string>();
+        DateTime endTime = DateTime.Now.AddSeconds(_duration);
 
-        List<string> responses = GetListFromUser();
-        Console.WriteLine($"You listed {_count} items.");
+        while (DateTime.Now < endTime)
+        {
+            Console.Write("> ");
+            items.Add(Console.ReadLine());
+        }
 
-        DisplayEndingMessage();
+        Console.WriteLine($"You listed {items.Count} items!");
+        DisplayEndMessage();
     }
 }

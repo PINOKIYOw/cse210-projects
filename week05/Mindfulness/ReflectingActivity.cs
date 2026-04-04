@@ -1,64 +1,46 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Threading;
 
-public class ReflectingActivity : Activity
+public class ReflectionActivity : Activity
 {
     private List<string> _prompts = new List<string>
     {
-        "Think of a time you stood up someone else.",
-        "Think of a time you did something really difficult.",
-        "Think of a time you helped someone in need.",
-        "Think of a time you did something truly selfless",
+        "Think of a time you stood up for someone.",
+        "Think of a time you did something difficult.",
+        "Think of a time you helped someone."
     };
 
     private List<string> _questions = new List<string>
     {
-        "Why was this experience meaningful to you?",
-        "Have you ever done anything like this before?",
-        "How did you get started?",
-        "How did you feel when it was complete?",
-        "What made this time different than other times when you were not as successful?",
-        "What is your favorite thing about this experience?",
-        "What could you learn from this experience that applies to other situations?",
-        "What did you learn about yourself through this experience?",
-        "How can you keep this experience in mind in the future?",
+        "Why was this meaningful?",
+        "How did you feel?",
+        "What did you learn?",
+        "How can you apply this again?"
     };
-    public ReflectingActivity(int duration) : base("Reflection", "reflect on times in your life when you have shown strength and resilience. This will help you recognize the power you have and how you can use it in other aspects in your life.", duration)
-    {
 
+    public ReflectionActivity() : base(
+        "Reflection",
+        "This activity helps you reflect on your strengths.")
+    {
     }
+
     public void Run()
     {
-        Console.Clear();
         DisplayStartMessage();
-        Console.WriteLine("Get Ready...");
-        ShowSpinner(5);
-        Console.WriteLine();
 
-        Console.WriteLine("Consider the following prompt: ");
-        Console.WriteLine($" --- {GetRandom(_prompts, _prevPrompt)} ---");
-        Console.WriteLine();
+        Random rand = new Random();
+        Console.WriteLine(_prompts[rand.Next(_prompts.Count)]);
+        ShowSpinner(3);
 
-        Console.WriteLine("When you have something in mind, press ENTER to continue.");
-        Console.ReadLine();
-
-        Console.WriteLine("Now ponder on each of the following questions and how they relate to this experience.");
-        Console.Write("You may begin in: ");
-        ShowCountDown(5);
-
-        Console.Clear();
-
-        DateTime startTime = DateTime.Now;
-        DateTime endTime = startTime.AddSeconds(Duration);
-
-        while (DateTime.Now < endTime)
+        int time = 0;
+        while (time < _duration)
         {
-            Console.WriteLine($" --- {GetRandom(_questions, _prevQuestion)} ---");
-            Thread.Sleep(6000);
+            string question = _questions[rand.Next(_questions.Count)];
+            Console.WriteLine(question);
+            ShowSpinner(4);
+            time += 4;
         }
 
-        DisplayEndingMessage();
+        DisplayEndMessage();
     }
 }
