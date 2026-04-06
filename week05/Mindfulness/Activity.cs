@@ -18,8 +18,12 @@ public class Activity
         Console.Clear();
         Console.WriteLine($"Welcome to the {_name} Activity.");
         Console.WriteLine(_description);
+
         Console.Write("\nEnter duration (seconds): ");
-        _duration = int.Parse(Console.ReadLine());
+        while (!int.TryParse(Console.ReadLine(), out _duration))
+        {
+            Console.Write("Please enter a valid number: ");
+        }
 
         Console.WriteLine("\nGet ready...");
         ShowSpinner(3);
