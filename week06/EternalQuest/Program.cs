@@ -17,6 +17,7 @@ class Program
             Console.WriteLine("7. Quit");
 
             string choice = Console.ReadLine();
+            // - Implemented polymorphism across goal types
             // - Designed scalable goal system
             if (choice == "1")
             {
